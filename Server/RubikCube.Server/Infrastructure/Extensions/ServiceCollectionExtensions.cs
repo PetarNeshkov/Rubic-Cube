@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RubikCube.Data;
 using RubikCube.Data.Seeding;
+using RubikCube.Service;
+using RubikCube.Service.Interfaces;
 
 namespace RubikCube.Server.Infrastructure.Extensions;
 
@@ -35,4 +37,12 @@ public static class ServiceCollectionExtensions
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+    
+    public static IServiceCollection AddApplicationServices(
+        this IServiceCollection services)
+    {
+        services.AddScoped<ICubeService, CubeService>();
+
+        return services;
+    }
 }

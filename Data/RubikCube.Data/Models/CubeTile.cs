@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using RubikCube.Data.Enums;
+using RubikCube.Models.Enums;
 using static RubikCube.Data.Constraints.DatabaseConstants;
 using static RubikCube.Data.Constraints.DatabaseConstants.CubeTile;
 

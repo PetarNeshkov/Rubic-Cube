@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Client\RubikCube.Client\RubikCube.Client.esproj" />
     <ProjectReference Include="..\..\Data\RubikCube.Data\RubikCube.Data.csproj" />
+    <ProjectReference Include="..\..\Services\RubikCube.Service\RubikCube.Service.csproj" />
     <ProjectReference Include="..\rubikcube.client\rubikcube.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>

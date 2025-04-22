@@ -1,4 +1,4 @@
-﻿namespace RubikCube.Data.Enums;
+﻿namespace RubikCube.Models.Enums;
 
 public enum FaceName
 {

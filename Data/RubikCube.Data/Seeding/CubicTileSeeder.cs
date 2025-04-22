@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RubikCube.Data.Enums;
 using RubikCube.Data.Models;
 using RubikCube.Data.Seeding.Interfaces;
+using RubikCube.Models.Enums;
 
 namespace RubikCube.Data.Seeding;
 
