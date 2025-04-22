@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{BF0237EF-9277-4F9E-A9D4-77DAD8A0A0D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{84152883-1C86-4050-BA00-D5796BC5E05D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubikCube.Server", "Server\RubikCube.Server\RubikCube.Server.csproj", "{265E09A3-F46E-4BBC-A43F-4AAA4E339990}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "RubikCube.Client", "Client\RubikCube.Client\RubikCube.Client.esproj", "{82ABA528-DDFC-447B-95B4-255B44BBE10F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{99CE7819-F923-4504-AEC3-8D717FF51289}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubikCube.Data", "Data\RubikCube.Data\RubikCube.Data.csproj", "{C78A9EC5-8A21-4317-AF0B-0287E0DA9107}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{265E09A3-F46E-4BBC-A43F-4AAA4E339990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265E09A3-F46E-4BBC-A43F-4AAA4E339990}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265E09A3-F46E-4BBC-A43F-4AAA4E339990}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265E09A3-F46E-4BBC-A43F-4AAA4E339990}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82ABA528-DDFC-447B-95B4-255B44BBE10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82ABA528-DDFC-447B-95B4-255B44BBE10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82ABA528-DDFC-447B-95B4-255B44BBE10F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{82ABA528-DDFC-447B-95B4-255B44BBE10F}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{C78A9EC5-8A21-4317-AF0B-0287E0DA9107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C78A9EC5-8A21-4317-AF0B-0287E0DA9107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C78A9EC5-8A21-4317-AF0B-0287E0DA9107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C78A9EC5-8A21-4317-AF0B-0287E0DA9107}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B23F5A01-46DA-4D64-9B0F-91436E447832}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{265E09A3-F46E-4BBC-A43F-4AAA4E339990} = {84152883-1C86-4050-BA00-D5796BC5E05D}
+		{82ABA528-DDFC-447B-95B4-255B44BBE10F} = {BF0237EF-9277-4F9E-A9D4-77DAD8A0A0D6}
+		{C78A9EC5-8A21-4317-AF0B-0287E0DA9107} = {99CE7819-F923-4504-AEC3-8D717FF51289}
+	EndGlobalSection
+EndGlobal
