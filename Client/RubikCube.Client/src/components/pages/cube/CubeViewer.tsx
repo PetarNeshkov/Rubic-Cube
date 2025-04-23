@@ -1,5 +1,5 @@
 import useCubeTiles from "../../../hooks/use-cube-tiles.ts";
-import {CSSProperties, Fragment, useCallback} from "react";
+import {CSSProperties, Fragment, useCallback, useEffect} from "react";
 import {FaceName} from "../../../models/cube-tile.model.ts";
 import styles from "./CubeViewer.module.css";
 import SpinningLoader from "../../spinning-loader/SpinningLoader.tsx";
@@ -18,17 +18,15 @@ const CubeViewer = () => {
         state: {tiles},
     } = useCubeTiles();
 
+    useEffect(() => {
+        document.title = "Rubik Cube";
+    }, []);
+
     const renderFace = useCallback((face: FaceName) => {
         const faceTiles = tiles.filter(t => t.face === face);
         return (
-            <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(3, 30px)",
-                    gridTemplateRows: "repeat(3, 30px)",
-                    gap: 2,
-                    ...facePositionStyles[face],
-                }}
+            <div className={`${styles.faceGrid}`} 
+                 style={{ ...facePositionStyles[face] }}
             >
                 {faceTiles.map(tile => (
                     <div

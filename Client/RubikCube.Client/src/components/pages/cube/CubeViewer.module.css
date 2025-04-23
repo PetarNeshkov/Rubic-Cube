@@ -19,6 +19,13 @@
     gap: 0;
 }
 
+.faceGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 30px);
+    grid-template-rows: repeat(3, 30px);
+    gap: 2px;
+}
+
 .up { grid-area: up; }
 .down { grid-area: down; }
 .left { grid-area: left; }
