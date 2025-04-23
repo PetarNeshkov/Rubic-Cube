@@ -1,0 +1,27 @@
+.cubeGrid {
+    display: grid;
+    grid-template-areas:
+    ".    up     .    ."
+    "left front right back"
+    ".   down    .    .";
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(3, auto);
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 20px;
+}
+
+.face {
+    display: grid;
+    grid-template-columns: repeat(3, 30px);
+    grid-template-rows: repeat(3, 30px);
+    gap: 0;
+}
+
+.up { grid-area: up; }
+.down { grid-area: down; }
+.left { grid-area: left; }
+.right { grid-area: right; }
+.front { grid-area: front; }
+.back { grid-area: back; }
