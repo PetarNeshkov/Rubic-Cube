@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <SpaRoot>..\rubikcube.client</SpaRoot>
+    <SpaRoot>..\..\Client\RubikCube.Client\</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>
     <RootNamespace>RubikCube.Server</RootNamespace>
@@ -22,12 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Client\RubikCube.Client\RubikCube.Client.esproj" />
-    <ProjectReference Include="..\..\Data\RubikCube.Data\RubikCube.Data.csproj" />
-    <ProjectReference Include="..\..\Services\RubikCube.Service\RubikCube.Service.csproj" />
-    <ProjectReference Include="..\rubikcube.client\rubikcube.client.esproj">
+    <ProjectReference Include="..\..\Client\RubikCube.Client\RubikCube.Client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\Data\RubikCube.Data\RubikCube.Data.csproj" />
+    <ProjectReference Include="..\..\Services\RubikCube.Service\RubikCube.Service.csproj" />
   </ItemGroup>
 
 </Project>

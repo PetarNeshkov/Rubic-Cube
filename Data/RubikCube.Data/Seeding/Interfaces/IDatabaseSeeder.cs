@@ -1,4 +1,4 @@
-﻿using RubikCube.Data;
+﻿namespace RubikCube.Data.Seeding.Interfaces;
 
 public interface IDatabaseSeeder
 {
