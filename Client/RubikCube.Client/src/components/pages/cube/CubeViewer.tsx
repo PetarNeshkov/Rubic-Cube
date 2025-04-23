@@ -1,16 +1,17 @@
 import useCubeTiles from "../../../hooks/use-cube-tiles.ts";
-import {CSSProperties, useCallback} from "react";
+import {CSSProperties, Fragment, useCallback} from "react";
 import {FaceName} from "../../../models/cube-tile.model.ts";
 import styles from "./CubeViewer.module.css";
+import SpinningLoader from "../../spinning-loader/SpinningLoader.tsx";
 
 
 const facePositionStyles: Record<FaceName, CSSProperties> = {
-    Up: { gridArea: "up" },
-    Down: { gridArea: "down" },
-    Left: { gridArea: "left" },
-    Right: { gridArea: "right" },
-    Front: { gridArea: "front" },
-    Back: { gridArea: "back" },
+    Up: {gridArea: "up"},
+    Down: {gridArea: "down"},
+    Left: {gridArea: "left"},
+    Right: {gridArea: "right"},
+    Front: {gridArea: "front"},
+    Back: {gridArea: "back"},
 };
 const CubeViewer = () => {
     const {
@@ -44,10 +45,15 @@ const CubeViewer = () => {
         );
     }, [tiles]);
 
+    if (tiles.length == 0) {
+        return (<SpinningLoader/>)
+    }
+
     return (
         <div className={styles.cubeGrid}>
             {(["Up", "Down", "Left", "Right", "Front", "Back"] as FaceName[])
-                .map(face => renderFace(face))}
+                .map(face =>(
+                    <Fragment key={face}>{renderFace(face)}</Fragment>))}
         </div>
     );
 };
