@@ -3,3 +3,4 @@
  const CUBES_ENDPOINT = 'Cubes';
  
  export const GET_CUBE = `${API_BASE_URL}${CUBES_ENDPOINT}/GetCube`;
+ export const ROTATE_CUBE = `${API_BASE_URL}${CUBES_ENDPOINT}/RotateCube`;

@@ -1,8 +1,7 @@
-import image from './page-not-found.png';
-
-import styles from './NotFoundPage.module.css';
-import { useNavigate } from 'react-router-dom';
 import {useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import image from '../../assets/page-not-found.png'
+import styles from './NotFoundPage.module.css';
 
 const NotFoundPage = () => {
     const navigate = useNavigate();

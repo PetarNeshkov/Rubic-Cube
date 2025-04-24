@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
-import CubeViewerPage from "./components/pages/cube/CubeViewerPage.tsx";
-import ErrorPage from "./components/pages/error/ErrorPage.tsx";
-import NotFoundPage from "./components/pages/not-found/NotFoundPage.tsx";
+import CubeViewerPage from "./pages/cube/CubeViewerPage.tsx";
+import ErrorPage from "./pages/error/ErrorPage.tsx";
+import NotFoundPage from "./pages/not-found/NotFoundPage.tsx";
 
 const router = createBrowserRouter([
     {

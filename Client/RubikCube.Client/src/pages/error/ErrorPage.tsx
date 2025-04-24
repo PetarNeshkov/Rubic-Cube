@@ -1,9 +1,8 @@
-import {isRouteErrorResponse, useNavigate, useRouteError } from "react-router-dom";
-import {ErrorPageProps} from "../../../models/error.model";
 import {useCallback, useEffect } from "react";
-
-import styles from "./ErrorPage.module.css";
+import {isRouteErrorResponse, useNavigate, useRouteError } from "react-router-dom";
 import NotFoundPage from "../not-found/NotFoundPage";
+import {ErrorPageProps} from "../../models/error.model.ts";
+import styles from "./ErrorPage.module.css";
 
 const ErrorPage = ({ message = "Something went wrong."}: ErrorPageProps) => {
     const navigate = useNavigate();

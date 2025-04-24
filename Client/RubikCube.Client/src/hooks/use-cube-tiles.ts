@@ -1,7 +1,7 @@
-﻿import useHttp from "../common/use-http.ts";
-import {GET_CUBE} from "../common/utils/urls.ts";
+﻿import {GET_CUBE, ROTATE_CUBE} from "../common/utils/urls.ts";
 import {useCallback, useEffect, useState} from "react";
 import {CubeTile, FaceName} from "../models/cube-tile.model.ts";
+import useHttp from "./use-http.ts";
 
 const FACE_ENUM_MAP: Record<number, FaceName> = {
   0: "Up",
@@ -42,6 +42,25 @@ const useCubeTiles = () => {
     }
     
   },[tiles.length]);
+
+  const rotateFace = useCallback(async (move: string) => {
+    try {
+      const rotated = await useHttp.post<CubeTile[]>(ROTATE_CUBE, { move });
+      const normalized = rotated.map(tile => ({
+        ...tile,
+        face: FACE_ENUM_MAP[Number(tile.face)],
+      }));
+      
+      setTiles(normalized);
+      setError(null);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+
+      setError(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
   
   useEffect(() => {
     getInitialCube();
@@ -54,7 +73,7 @@ const useCubeTiles = () => {
       error,
     },
     actions: {
-      getInitialCube,
+      rotateFace,
     }
   };
 };

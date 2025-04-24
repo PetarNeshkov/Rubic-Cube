@@ -1,22 +1,16 @@
-import useCubeTiles from "../../../hooks/use-cube-tiles.ts";
-import {CSSProperties, Fragment, useCallback, useEffect} from "react";
-import {FaceName} from "../../../models/cube-tile.model.ts";
+import {Fragment, useCallback, useEffect} from "react";
 import styles from "./CubeViewerPage.module.css";
-import SpinningLoader from "../../spinning-loader/SpinningLoader.tsx";
 import ErrorPage from "../error/ErrorPage.tsx";
+import useCubeTiles from "../../hooks/use-cube-tiles.ts";
+import {FaceName} from "../../models/cube-tile.model.ts";
+import {FACE_NAMES, FACE_POSITION_STYLES} from "../../common/constants.ts";
+import SpinningLoader from "../../components/spinning-loader/SpinningLoader.tsx";
+import CubeRotator from "../../components/cube-rotator/CubeRotator.tsx";
 
-
-const facePositionStyles: Record<FaceName, CSSProperties> = {
-    Up: {gridArea: "up"},
-    Down: {gridArea: "down"},
-    Left: {gridArea: "left"},
-    Right: {gridArea: "right"},
-    Front: {gridArea: "front"},
-    Back: {gridArea: "back"},
-};
 const CubeViewerPage = () => {
     const {
         state: {tiles, isLoading, error},
+        actions: {rotateFace}
     } = useCubeTiles();
 
     useEffect(() => {
@@ -26,8 +20,8 @@ const CubeViewerPage = () => {
     const renderFace = useCallback((face: FaceName) => {
         const faceTiles = tiles.filter(t => t.face === face);
         return (
-            <div className={`${styles.faceGrid}`} 
-                 style={{ ...facePositionStyles[face] }}
+            <div className={`${styles.faceGrid}`}
+                 style={{...FACE_POSITION_STYLES[face]}}
             >
                 {faceTiles.map(tile => (
                     <div
@@ -49,16 +43,19 @@ const CubeViewerPage = () => {
     }
 
     if (error) {
-        return <ErrorPage message={error} />;
+        return <ErrorPage message={error}/>;
     }
 
     return (
-        <div className={styles.cubeGrid}>
-            {(["Up", "Down", "Left", "Right", "Front", "Back"] as FaceName[])
-                .map(face =>(
-                    <Fragment key={face}>{renderFace(face)}</Fragment>))}
-        </div>
+        <>
+            <div className={styles.cubeGrid}>
+                {FACE_NAMES
+                    .map(face => (
+                        <Fragment key={face}>{renderFace(face)}</Fragment>))}
+            </div>
+            <CubeRotator onRotate={rotateFace}/>
+        </>
+
     );
 };
-
 export default CubeViewerPage;
