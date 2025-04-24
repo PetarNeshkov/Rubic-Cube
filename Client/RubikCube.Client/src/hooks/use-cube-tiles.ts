@@ -14,7 +14,8 @@ const FACE_ENUM_MAP: Record<number, FaceName> = {
 
 const useCubeTiles = () => {
   const [tiles, setTiles] = useState<CubeTile[]>([]);
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const getInitialCube = useCallback(async () => {
     if(tiles.length !== 0) {
@@ -22,6 +23,7 @@ const useCubeTiles = () => {
     }
 
     try {
+      setIsLoading(true);
       const data = await useHttp.get<CubeTile[]>(GET_CUBE);
       
       const normalizedTiles = data.map(tile => ({
@@ -29,11 +31,14 @@ const useCubeTiles = () => {
         face: FACE_ENUM_MAP[Number(tile.face)]
       }));
       
-      setTiles(normalizedTiles);
+      setTiles(normalizedTiles)
+      setError(null);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
 
-      console.error(errorMessage);
+      setError(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
     
   },[tiles.length]);
@@ -44,7 +49,9 @@ const useCubeTiles = () => {
   
   return {
     state: {
-      tiles
+      tiles,
+      isLoading,
+      error,
     },
     actions: {
       getInitialCube,

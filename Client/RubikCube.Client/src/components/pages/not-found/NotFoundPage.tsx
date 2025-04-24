@@ -4,7 +4,7 @@ import styles from './NotFoundPage.module.css';
 import { useNavigate } from 'react-router-dom';
 import {useCallback, useEffect } from 'react';
 
-const NotFound = () => {
+const NotFoundPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,4 +32,4 @@ const NotFound = () => {
         </div>
     );
 };
-export default NotFound;
+export default NotFoundPage;

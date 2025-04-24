@@ -1,17 +1,23 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
-import CubeViewer from "./components/pages/cube/CubeViewer.tsx";
-import NotFound from './components/pages/not-found/NotFoundPage.tsx';
+import CubeViewerPage from "./components/pages/cube/CubeViewerPage.tsx";
+import ErrorPage from "./components/pages/error/ErrorPage.tsx";
+import NotFoundPage from "./components/pages/not-found/NotFoundPage.tsx";
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <CubeViewerPage />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "*",
+        element: <NotFoundPage />,
+    },
+]);
 
 const App = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<CubeViewer/>}/>
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-        </BrowserRouter>
-    );
-}
+    return <RouterProvider router={router} />;
+};
 
 export default App;

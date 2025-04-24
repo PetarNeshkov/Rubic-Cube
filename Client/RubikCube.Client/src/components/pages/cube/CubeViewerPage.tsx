@@ -1,8 +1,9 @@
 import useCubeTiles from "../../../hooks/use-cube-tiles.ts";
 import {CSSProperties, Fragment, useCallback, useEffect} from "react";
 import {FaceName} from "../../../models/cube-tile.model.ts";
-import styles from "./CubeViewer.module.css";
+import styles from "./CubeViewerPage.module.css";
 import SpinningLoader from "../../spinning-loader/SpinningLoader.tsx";
+import ErrorPage from "../error/ErrorPage.tsx";
 
 
 const facePositionStyles: Record<FaceName, CSSProperties> = {
@@ -13,9 +14,9 @@ const facePositionStyles: Record<FaceName, CSSProperties> = {
     Front: {gridArea: "front"},
     Back: {gridArea: "back"},
 };
-const CubeViewer = () => {
+const CubeViewerPage = () => {
     const {
-        state: {tiles},
+        state: {tiles, isLoading, error},
     } = useCubeTiles();
 
     useEffect(() => {
@@ -43,8 +44,12 @@ const CubeViewer = () => {
         );
     }, [tiles]);
 
-    if (tiles.length == 0) {
+    if (isLoading) {
         return (<SpinningLoader/>)
+    }
+
+    if (error) {
+        return <ErrorPage message={error} />;
     }
 
     return (
@@ -56,4 +61,4 @@ const CubeViewer = () => {
     );
 };
 
-export default CubeViewer;
+export default CubeViewerPage;
