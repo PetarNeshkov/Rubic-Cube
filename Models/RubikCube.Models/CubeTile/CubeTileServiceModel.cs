@@ -7,11 +7,11 @@ public class CubeTileServiceModel
 {
     public int Id { get; init; }
     
-    public FaceName Face { get; set; }
+    public FaceName Face { get; init; }
     
-    public int Row { get; init; }
+    public int Row { get; set; }
     
-    public int Column { get; init; }
+    public int Column { get; set; }
     
-    public string Color { get; init; }
+    public string Color { get; set; }
 }

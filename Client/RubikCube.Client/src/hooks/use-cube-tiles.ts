@@ -1,16 +1,8 @@
 ﻿import {GET_CUBE, ROTATE_CUBE} from "../common/utils/urls.ts";
 import {useCallback, useEffect, useState} from "react";
-import {CubeTile, FaceName} from "../models/cube-tile.model.ts";
+import {CubeTile, FACE_ENUM_MAP} from "../models/cube-tile.model.ts";
 import useHttp from "./use-http.ts";
-
-const FACE_ENUM_MAP: Record<number, FaceName> = {
-  0: "Up",
-  1: "Down",
-  2: "Left",
-  3: "Right",
-  4: "Front",
-  5: "Back"
-};
+import {FACE_STRING_TO_ENUM_MAP, RotateCubeRequest} from "../models/cube-rotate.model.ts";
 
 const useCubeTiles = () => {
   const [tiles, setTiles] = useState<CubeTile[]>([]);
@@ -45,7 +37,17 @@ const useCubeTiles = () => {
 
   const rotateFace = useCallback(async (move: string) => {
     try {
-      const rotated = await useHttp.post<CubeTile[]>(ROTATE_CUBE, { move });
+      const mappedTiles = tiles.map(tile => ({
+        ...tile,
+        face: FACE_STRING_TO_ENUM_MAP[tile.face] 
+      })) as [];
+      
+      const requestModel : RotateCubeRequest = {
+         move, 
+         tiles: mappedTiles,
+      }
+      
+      const rotated = await useHttp.post<CubeTile[]>(ROTATE_CUBE, requestModel);
       const normalized = rotated.map(tile => ({
         ...tile,
         face: FACE_ENUM_MAP[Number(tile.face)],
@@ -60,7 +62,7 @@ const useCubeTiles = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [tiles]);
   
   useEffect(() => {
     getInitialCube();
