@@ -10,12 +10,16 @@ import CubeRotator from "../../components/cube-rotator/CubeRotator.tsx";
 const CubeViewerPage = () => {
     const {
         state: {tiles, isLoading, error},
-        actions: {rotateFace}
+        actions: {rotateFace, getInitialCubeData}
     } = useCubeTiles();
 
     useEffect(() => {
         document.title = "Rubik Cube";
     }, []);
+
+    const handleReset = useCallback(() => {
+        getInitialCubeData();
+    }, [getInitialCubeData]);
 
     const renderFace = useCallback((face: FaceName) => {
         const faceTiles = tiles.filter(t => t.face === face);
@@ -53,7 +57,7 @@ const CubeViewerPage = () => {
                     .map(face => (
                         <Fragment key={face}>{renderFace(face)}</Fragment>))}
             </div>
-            <CubeRotator onRotate={rotateFace}/>
+            <CubeRotator onRotate={rotateFace} onReset={handleReset}/>
         </>
 
     );

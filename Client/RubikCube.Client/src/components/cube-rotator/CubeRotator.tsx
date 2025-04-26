@@ -3,9 +3,10 @@ import styles from "./CubeRotator.module.css";
 
 interface CubeRotatorProps {
     onRotate: (move: string) => void;
+    onReset: () => void;
 }
 
-const CubeRotator = ({onRotate}: CubeRotatorProps) => {
+const CubeRotator = ({onRotate, onReset}: CubeRotatorProps) => {
     return (
         <div className={styles.container}>
             {ROTATION_MOVES.map((move) => (
@@ -18,6 +19,15 @@ const CubeRotator = ({onRotate}: CubeRotatorProps) => {
                     {move}
                 </button>
             ))}
+            <div>
+                <button
+                    className={styles.resetButton}
+                    onClick={onReset}
+                    aria-label="Reset Cube"
+                >
+                    Reset
+                </button>
+            </div>
         </div>
     );
 }

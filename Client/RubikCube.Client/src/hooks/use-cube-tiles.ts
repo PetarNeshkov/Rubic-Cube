@@ -9,20 +9,16 @@ const useCubeTiles = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const getInitialCube = useCallback(async () => {
-    if(tiles.length !== 0) {
-      return;
-    }
-
+  const getInitialCubeData = useCallback(async () => {
     try {
       setIsLoading(true);
       const data = await useHttp.get<CubeTile[]>(GET_CUBE);
-      
+
       const normalizedTiles = data.map(tile => ({
         ...tile,
         face: FACE_ENUM_MAP[Number(tile.face)]
       }));
-      
+
       setTiles(normalizedTiles)
       setError(null);
     } catch (error) {
@@ -32,8 +28,16 @@ const useCubeTiles = () => {
     } finally {
       setIsLoading(false);
     }
+  }, [])
+  
+  const getInitialCube = useCallback(async () => {
+    if(tiles.length !== 0) {
+      return;
+    }
+
+    await getInitialCubeData();
     
-  },[tiles.length]);
+  },[getInitialCubeData, tiles.length]);
 
   const rotateFace = useCallback(async (move: string) => {
     try {
@@ -76,6 +80,7 @@ const useCubeTiles = () => {
     },
     actions: {
       rotateFace,
+      getInitialCubeData
     }
   };
 };
