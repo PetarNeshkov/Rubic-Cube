@@ -91,92 +91,87 @@ public class CubeService(CubeDbContext cubeDbContext) : ICubeService
 
     private static void RotateUpSide(IList<CubeTileServiceModel> tiles) =>
         SwapEdges(tiles, [
-            new EdgeServiceModel(FaceName.Back, 0, false),  // Top row of Back face
-            new EdgeServiceModel(FaceName.Right, 0, false), // Top row of Right face
-            new EdgeServiceModel(FaceName.Front, 0, false), // Top row of Front face
-            new EdgeServiceModel(FaceName.Left, 0, false)   // Top row of Left face
+            new EdgeServiceModel(FaceName.Back, 0, false),
+            new EdgeServiceModel(FaceName.Right, 0, false),
+            new EdgeServiceModel(FaceName.Front, 0, false),
+            new EdgeServiceModel(FaceName.Left, 0, false)
         ], clockwise: true);
 
     private static void RotateDownSide(IList<CubeTileServiceModel> tiles) =>
         SwapEdges(tiles, [
-            new EdgeServiceModel(FaceName.Front, 2, false),  // Bottom row of Front face
-            new EdgeServiceModel(FaceName.Right, 2, false),  // Bottom row of Right face
-            new EdgeServiceModel(FaceName.Back, 2, false),   // Bottom row of Back face
-            new EdgeServiceModel(FaceName.Left, 2, false)    // Bottom row of Left face
+            new EdgeServiceModel(FaceName.Front, 2, false),
+            new EdgeServiceModel(FaceName.Right, 2, false),
+            new EdgeServiceModel(FaceName.Back, 2, false),
+            new EdgeServiceModel(FaceName.Left, 2, false)
         ], clockwise: false);
 
     private static void RotateFrontSide(IList<CubeTileServiceModel> tiles) =>
         SwapEdges(tiles, [
-            new EdgeServiceModel(FaceName.Up, 2, false),     // Bottom row of Up face
-            new EdgeServiceModel(FaceName.Right, 0, true),   // Left column of Right face
-            new EdgeServiceModel(FaceName.Down, 0, false),   // Top row of Down face (reversed)
-            new EdgeServiceModel(FaceName.Left, 2, true)     // Right column of Left face
+            new EdgeServiceModel(FaceName.Up, 2, false),
+            new EdgeServiceModel(FaceName.Right, 0, true),
+            new EdgeServiceModel(FaceName.Down, 0, false),
+            new EdgeServiceModel(FaceName.Left, 2, true)
         ], clockwise: true);
 
     private static void RotateBackSide(IList<CubeTileServiceModel> tiles) =>
         SwapEdges(tiles, [
-            new EdgeServiceModel(FaceName.Up, 0, false),     // Top row of Up face
-            new EdgeServiceModel(FaceName.Left, 0, true),    // Left column of Left face
-            new EdgeServiceModel(FaceName.Down, 2, false),   // Bottom row of Down face
-            new EdgeServiceModel(FaceName.Right, 2, true)    // Right column of Right face
+            new EdgeServiceModel(FaceName.Up, 0, false),
+            new EdgeServiceModel(FaceName.Left, 0, true),
+            new EdgeServiceModel(FaceName.Down, 2, false),
+            new EdgeServiceModel(FaceName.Right, 2, true)
         ], clockwise: false);
 
     private static void RotateRightSide(IList<CubeTileServiceModel> tiles) =>
         SwapEdges(tiles, [
-            new EdgeServiceModel(FaceName.Up, 2, true),      // Right column of Up face
-            new EdgeServiceModel(FaceName.Back, 0, true),    // Left column of Back face (reversed)
-            new EdgeServiceModel(FaceName.Down, 2, true),    // Right column of Down face
-            new EdgeServiceModel(FaceName.Front, 2, true)    // Right column of Front face
+            new EdgeServiceModel(FaceName.Up, 2, true),
+            new EdgeServiceModel(FaceName.Back, 0, true),
+            new EdgeServiceModel(FaceName.Down, 2, true),
+            new EdgeServiceModel(FaceName.Front, 2, true)
         ], clockwise: false);
 
     private static void RotateLeftSide(IList<CubeTileServiceModel> tiles) =>
         SwapEdges(tiles, [
-            new EdgeServiceModel(FaceName.Up, 0, true),      // Left column of Up face
-            new EdgeServiceModel(FaceName.Front, 0, true),   // Left column of Front face
-            new EdgeServiceModel(FaceName.Down, 0, true),    // Left column of Down face
-            new EdgeServiceModel(FaceName.Back, 2, true)     // Right column of Back face (reversed)
+            new EdgeServiceModel(FaceName.Up, 0, true),
+            new EdgeServiceModel(FaceName.Front, 0, true),
+            new EdgeServiceModel(FaceName.Down, 0, true),
+            new EdgeServiceModel(FaceName.Back, 2, true)
         ], clockwise: true);
 
     private static void SwapEdges(IList<CubeTileServiceModel> tiles, EdgeServiceModel[] edges, bool clockwise)
     {
-        // First capture all the edge colors before any changes
         var edgeColors = new string[edges.Length][];
         for (int i = 0; i < edges.Length; i++)
         {
             edgeColors[i] = GetEdge(tiles, edges[i].Face, edges[i].Index, edges[i].IsColumn);
         }
-    
+
         if (clockwise)
         {
-            // For clockwise rotation
             for (int i = 0; i < edges.Length; i++)
             {
-                int sourceIndex = (i - 1 + edges.Length) % edges.Length;
-            
-                // Check if we need to reverse the edge (when transferring between row and column)
+                var sourceIndex = (i - 1 + edges.Length) % edges.Length;
+
                 var colors = edgeColors[sourceIndex].ToArray();
                 if (edges[i].IsColumn != edges[sourceIndex].IsColumn)
                 {
                     Array.Reverse(colors);
                 }
-            
+
                 SetEdge(tiles, edges[i].Face, edges[i].Index, edges[i].IsColumn, colors);
             }
         }
         else
         {
-            // For counterclockwise rotation
             for (int i = 0; i < edges.Length; i++)
             {
-                int sourceIndex = (i + 1) % edges.Length;
-            
-                // Check if we need to reverse the edge (when transferring between row and column)
+                var sourceIndex = (i + 1) % edges.Length;
+
                 var colors = edgeColors[sourceIndex].ToArray();
                 if (edges[i].IsColumn != edges[sourceIndex].IsColumn)
                 {
                     Array.Reverse(colors);
                 }
-            
+
                 SetEdge(tiles, edges[i].Face, edges[i].Index, edges[i].IsColumn, colors);
             }
         }
@@ -185,26 +180,27 @@ public class CubeService(CubeDbContext cubeDbContext) : ICubeService
     private static string[] GetEdge(IList<CubeTileServiceModel> tiles, FaceName face, int index, bool isColumn)
     {
         var colors = new string[3];
-    
+
         for (int i = 0; i < 3; i++)
         {
             var row = isColumn ? i : index;
             var column = isColumn ? index : i;
-        
+
             var tile = tiles.First(t => t.Face == face && t.Row == row && t.Column == column);
             colors[i] = tile.Color;
         }
-    
+
         return colors;
     }
 
-    private static void SetEdge(IList<CubeTileServiceModel> tiles, FaceName face, int index, bool isColumn, string[] colors)
+    private static void SetEdge(IList<CubeTileServiceModel> tiles, FaceName face, int index, bool isColumn,
+        string[] colors)
     {
         for (int i = 0; i < 3; i++)
         {
             var row = isColumn ? i : index;
             var column = isColumn ? index : i;
-        
+
             var tile = tiles.First(t => t.Face == face && t.Row == row && t.Column == column);
             tile.Color = colors[i];
         }
