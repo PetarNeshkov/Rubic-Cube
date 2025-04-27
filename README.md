@@ -1,46 +1,47 @@
 # Rubic-Cube
-🔨 Built With
+🔨 Built With:
 
-.NET Core 8.0
+ •.NET Core 8.0
 
 Database:
 
-Entity Framework Core 8.0
+ •Entity Framework Core 8.0
 
-MSSQL Server
+ •MSSQL Server
 
 Back-End Language:
 
-C#
+ •C#
 
 Front-End Language:
 
-React 18
+ •React 18
 
 Markup Languages:
 
-HTML5
+ •HTML5
 
-CSS3
+ •CSS3
 
 Additionals:
 
-Swagger (for API documentation)
+ •Swagger (for API documentation)
 
-xUnit (for unit testing)
+ •xUnit (for unit testing)
 
 🚀 Starting the Project
 
 Start the Backend (ASP.NET Core 8 - HTTP Server)
-    1. npm install
-    2. dotnet run
+ 1. npm install
+
+ 2. dotnet run
 
 or
 
 Start the Frontend (React 18 + Vite) :
-    1. npm install
-    2. npm run dev
-    3. npm run startProjectWithVite
+ 1. npm install
+ 2. npm run dev
+ 3. npm run startProjectWithVite
 
 # License
 
